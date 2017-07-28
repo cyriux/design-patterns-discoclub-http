@@ -1,4 +1,4 @@
-package designpatterndiscoclub;
+package designpatternsdiscoclub;
 import java.util.Timer;
 import java.util.TimerTask;
 

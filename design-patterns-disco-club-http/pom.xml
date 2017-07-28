@@ -5,13 +5,18 @@
 	<artifactId>design-pattern-disco-club-http</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>net.code-story</groupId>
 			<artifactId>http</artifactId>
 			<version>2.105</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.mashape.unirest</groupId>
 			<artifactId>unirest-java</artifactId>

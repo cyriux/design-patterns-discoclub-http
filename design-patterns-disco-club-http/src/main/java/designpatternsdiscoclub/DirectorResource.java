@@ -1,4 +1,4 @@
-package designpatterndiscoclub;
+package designpatternsdiscoclub;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 

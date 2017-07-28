@@ -1,4 +1,4 @@
-package designpatterndiscoclub;
+package designpatternsdiscoclub;
 import java.io.File;
 
 import net.codestory.http.annotations.Get;

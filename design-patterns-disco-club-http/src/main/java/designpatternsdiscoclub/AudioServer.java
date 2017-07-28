@@ -1,4 +1,4 @@
-package designpatterndiscoclub;
+package designpatternsdiscoclub;
 import net.codestory.http.WebServer;
 
 public class AudioServer {
