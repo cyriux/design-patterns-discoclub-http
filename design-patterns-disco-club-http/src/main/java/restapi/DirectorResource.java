@@ -1,4 +1,4 @@
-package designpatternsdiscoclub;
+package restapi;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -25,7 +25,6 @@ public class DirectorResource {
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

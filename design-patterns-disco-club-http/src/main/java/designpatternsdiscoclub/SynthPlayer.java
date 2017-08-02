@@ -1,6 +1,10 @@
 package designpatternsdiscoclub;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 import javax.sound.midi.Instrument;
 import javax.sound.midi.MidiChannel;
@@ -8,26 +12,16 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
-import net.codestory.http.annotations.Get;
-import net.codestory.http.annotations.Prefix;
-import net.codestory.http.payload.Payload;
-
-/**
- * See https://fr.wikipedia.org/wiki/General_MIDI for the references of the
- * instruments
- *
- */
-
-@Prefix("/synth")
-public class SynthResource {
+public class SynthPlayer {
 
 	private final Synthesizer synthesizer;
 	private final Instrument[] instruments;
 	private final Timer timer = new Timer(false);
 
-	public SynthResource() {
+	public SynthPlayer() {
 		this.synthesizer = initSynth();
 		instruments = synthesizer == null ? null : synthesizer.getAvailableInstruments();
+		System.out.println(toString());
 	}
 
 	private static Synthesizer initSynth() {
@@ -41,23 +35,8 @@ public class SynthResource {
 		return null;
 	}
 
-	@Get("/:timbre/:note/:duration")
-	public Payload playback(String timbre, String note, String duration) {
-		playNote(timbre, note, duration);
-		return new Payload(201);
-
-	}
-
-	@Get("/:timbre/:note")
-	public Payload playback(String timbre, String note) {
-		playNote(timbre, note, "500");
-		return new Payload(201);
-	}
-
-	@Get("/:note")
-	public Payload playback(String note) {
-		playNote("0", note, "500");
-		return new Payload(201);
+	public List<String> allInstruments() {
+		return Arrays.asList(instruments).stream().map(i -> i.toString()).collect(Collectors.toList());
 	}
 
 	public void playNote(String timbre, String note, String duration) {
@@ -82,4 +61,8 @@ public class SynthResource {
 		}, durationMs);
 	}
 
+	@Override
+	public String toString() {
+		return "SynthPlayer: " + allInstruments();
+	}
 }
