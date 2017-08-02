@@ -6,6 +6,7 @@ import net.codestory.http.annotations.Get;
 import net.codestory.http.annotations.Prefix;
 import net.codestory.http.payload.Payload;
 
+@Deprecated
 @Prefix("/play")
 public class DirectorResource {
 
@@ -19,7 +20,7 @@ public class DirectorResource {
 		try {
 			Unirest.get("http://localhost:8080/sampler/gooohhh").asString();
 			Unirest.get("http://localhost:8080/synth/1/5/9000").asString();
-			Unirest.get("http://localhost:8080/sampler/happy").asString();
+			Unirest.get("http://localhost:8080/sampler/tamb").asString();
 			Thread.sleep(1000);
 			Unirest.get("http://localhost:8080/sampler/gooohhh").asString();
 		} catch (UnirestException e) {
