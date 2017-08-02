@@ -14,7 +14,7 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 import designpatternsdiscoclub.SamplePlayer;
 import designpatternsdiscoclub.SynthPlayer;
 
-public class IrcListener extends ListenerAdapter {
+public class AudioIrcListener extends ListenerAdapter {
 
 	private final SynthPlayer synth = new SynthPlayer();
 	private final SamplePlayer sampler = new SamplePlayer("app/", ".wav");
@@ -31,6 +31,10 @@ public class IrcListener extends ListenerAdapter {
 	}
 
 	public String parse(String msg) {
+		if (msg.equals("beat")) {
+			sampler.play("vox5");
+			return null;
+		}
 		if (msg.equals("sampler/")) {
 			return sampler.allSamples().toString();
 		}
@@ -71,7 +75,7 @@ public class IrcListener extends ListenerAdapter {
 		final String networkName = "irc.foonetic.net";
 		final String channelName = "#designpatternsdiscoclub";
 		Configuration configuration = new Configuration.Builder().setName(botNiickname).addServer(networkName)
-				.addAutoJoinChannel(channelName).addListener(new IrcListener()).buildConfiguration();
+				.addAutoJoinChannel(channelName).addListener(new AudioIrcListener()).buildConfiguration();
 		final PircBotX bot = new PircBotX(configuration);
 		try {
 			final TimerTask timerTask = new TimerTask() {
@@ -79,7 +83,11 @@ public class IrcListener extends ListenerAdapter {
 				public void run() {
 					try {
 						System.out.println("timer task");
-						bot.getUserChannelDao().getChannel(channelName).send().message("beat");
+						final long dayTimeMs = System.currentTimeMillis() % 86400000;
+						final int step = (int) ((dayTimeMs / 1000) % 4);
+						bot.getUserChannelDao().getChannel(channelName).send()
+								.message("beat/" + dayTimeMs + "/" + step);
+
 					} catch (DaoException e) {
 						e.printStackTrace();
 					}

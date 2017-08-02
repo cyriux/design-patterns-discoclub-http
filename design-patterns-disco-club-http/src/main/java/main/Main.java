@@ -1,12 +1,12 @@
 package main;
 
-import ircapi.IrcListener;
+import ircapi.AudioIrcListener;
 import restapi.AudioServer;
 
 public class Main {
 
 	public static void main(String[] args) {
-		IrcListener.startIrcServer();
+		AudioIrcListener.startIrcServer();
 		AudioServer.startWebServer();
 	}
 
